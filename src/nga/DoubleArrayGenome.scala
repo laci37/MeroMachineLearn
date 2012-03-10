@@ -1,6 +1,8 @@
 package nga
-//base class for Genomes working with an array of doubles as data
-abstract class DoubleArrayGenome(val data:Array[Double]) extends Genome{
+/**
+ * base class for Genomes working with an array of doubles as data
+ */
+abstract class DoubleArrayGenome(val data: Array[Double]) extends Genome {
   /**
    * the rate of crossovers
    */
@@ -15,19 +17,20 @@ abstract class DoubleArrayGenome(val data:Array[Double]) extends Genome{
   def mut2() = 0.1d
 
   /**
-   * hybridize operator
+   * logic behind hybridize operator, calculates new set of Doubles
    */
-  override def X(that: this.type):this.type
+  protected def calcData(that: Array[Double]): Array[Double] = {
+    if (that.size != data.size) throw new IllegalArgumentException("The size of the two arrays must be equal!")
     val rand = util.Random
-    var p = this //the parent currently being copied 
+    var p = this.data //the parent currently being copied 
     val newdata = for (i <- Range(0, data.length)) yield {
-      if (rand.nextDouble() < xover) {
-        if (p == this) p = that
-        else p = this
+      if (rand.nextDouble() < xover) { //change parent with crossover
+        if (p == this.data) p = that
+        else p = this.data
       }
-      if (rand.nextDouble() < mut) p.data(i) + (rand.nextGaussian) * mut2
-      else p.data(i)
+      if (rand.nextDouble() < mut) p(i) + (rand.nextGaussian) * mut2 //mutation
+      else p(i) //normal copy
     }
-    new this.type(newdata.toArray)
+    newdata.toArray
   }
 }
