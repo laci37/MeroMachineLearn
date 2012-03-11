@@ -39,8 +39,23 @@ class Layer(private val _size: Int, private val _actfunc: Double => Double) {
     ret
   }
 
+  /**
+   * counts the number of weights in the network including bias
+   */
+  def countWeights(): Int = {
+    if (inputs.size != 0) {
+      var sum = this.size //bias weights for all neurons
+      inputs foreach { il =>
+        sum += this.size * il.size
+        sum += il.countWeights()
+      }
+      sum
+    }
+    else 0 //input layers do not have any weights
+  }
+
   def const: Boolean = true
-  
+
 }
 
 object Layer {
@@ -55,5 +70,5 @@ object Layer {
     inner(out)
     ret
   }
-  
+
 }
