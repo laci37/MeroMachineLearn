@@ -14,12 +14,12 @@ class WeightState(data: Array[Double], val plan: Layer, val test: (Net => Double
   }
 
   def neighbor(): State = {
-    //change one weight between +-10%
+    //change weights randomly 
     val rand = util.Random
     val newdata = new Array[Double](data.size)
     data.copyToArray(newdata)
-    val changeIndex = rand.nextInt(data.size)
-    newdata(changeIndex) *= rand.nextDouble() / 5 + 0.9 //multiply by a value between 0.9 and 1.1
+    for (i <- (0 to data.size - 1))
+      newdata(i) += (rand.nextDouble - 0.5)*0.01 + newdata(i) * (rand.nextDouble - 0.5) * 0.2
     new WeightState(newdata, plan, test)
   }
 
