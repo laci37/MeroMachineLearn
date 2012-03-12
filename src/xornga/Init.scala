@@ -5,12 +5,7 @@ import neural.nga._
 object Init {
 
   def main(args: Array[String]): Unit = {
-    val plan= 2 lin
-    val l1= 1 lin
-    val l2= 2 lin;
-    l1 >> plan
-    l2 >> plan
-    l2 >> l1
+    val plan= (2 lin) >> (2 tanh) >> (1 tanh)
     
   }
 
