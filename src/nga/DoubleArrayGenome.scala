@@ -33,4 +33,19 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Genome {
     }
     newdata.toArray
   }
+
+  /**
+   * abstract method for creating an instance from data
+   */
+  protected def create(data: Array[Double]): this.type
+
+  /**
+   *  hybridize
+   */
+  override def X(that: Genome) = {
+    that match {
+      case that: this.type => create(calcData(that.data))
+      case _ => throw new IllegalArgumentException("that must be of type DoubleArrayGenome")
+    }
+  }
 }
