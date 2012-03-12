@@ -12,7 +12,8 @@ object Init {
     l1 >> plan
     l2 >> plan
     l2 >> l1
-    val opt= new HeuristicRiseOptimizer(WeightState.zero(plan,test))
+    val weights=Array[Double](0d,0d,0d,0d,-1d,0d,-1d,1d,0d,0d,-1d)
+    val opt= new Optimizer(new WeightState(weights,plan,test),1d)
     while (true){
       opt.optimize(1)
       println(opt.optimalCost)
@@ -35,7 +36,7 @@ object Init {
         sum += p.length
       }
     }
-    if (!(sum.isNaN || sum.isInfinite)) sum
+    if (!(sum.isNaN || sum.isInfinite)) -sum
     else Double.PositiveInfinity
   }
 
