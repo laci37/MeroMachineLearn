@@ -13,3 +13,9 @@ class WeightGenome(val weights: Array[Double], val plan: Layer, val test: (Net =
 
   override def create(data: Array[Double]) = new WeightGenome(data,plan,test).asInstanceOf[this.type] 
 }
+
+object WeightGenome {
+  def zero(plan: Layer, test: (Net=>Double))={
+    new WeightGenome(new Array[Double](plan.countWeights), plan, test)
+  }
+}

@@ -40,7 +40,7 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Genome {
   protected def create(data: Array[Double]): this.type
 
   /**
-   *  hybridize
+   *  hybridize, that must be of this.type
    */
   override def X(that: Genome) = {
     that match {
