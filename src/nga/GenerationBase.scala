@@ -1,12 +1,10 @@
 package nga
 
-class GenerationBase(override val members: Iterable[Genome]) extends Generation(members) {
-  
-  /**
-   * creates a successor Generation
-   */
-  override def next() = {
-    new GenerationBase(for (i <- (1 to members.size)) yield createMember())
+class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembers) {
+
+  override def step() = {
+    _members = for (i <- (1 to members.size)) yield { createMember }
+    tested = false
   }
 
   /**
@@ -36,6 +34,9 @@ class GenerationBase(override val members: Iterable[Genome]) extends Generation(
   protected var tested = false //true if the test has run
   protected var fitsum = 0d //the sum of fitnesses, used in roulette wheel
 
+  /**
+   * tests the whole generation
+   */
   protected def test() = {
     if (!tested) {
       members foreach testMember _
@@ -43,6 +44,9 @@ class GenerationBase(override val members: Iterable[Genome]) extends Generation(
     }
   }
 
+  /**
+   * tests a single member
+   */
   protected def testMember(g: Genome) = {
     fitsum += g.fitness
   }

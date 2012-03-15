@@ -1,6 +1,15 @@
 package nga
 
-abstract class Generation(val members: Traversable[Genome]) extends Iterator[Generation]{
-  override def next(): Generation
-  override def hasNext()=true
+abstract class Generation(initMembers: Iterable[Genome]) {
+  /**
+   * step to the next generation
+   */
+  def step()
+
+  /**
+   * members of the current generation
+   */
+  def members(): Iterable[Genome] = _members
+
+  protected var _members = initMembers
 }
