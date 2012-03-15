@@ -47,11 +47,25 @@ class Layer(private val _size: Int, private val _actfunc: Double => Double) {
       var sum = this.size //bias weights for all neurons
       inputs foreach { il =>
         sum += this.size * il.size
-        sum += il.countWeights()
+        sum += il.countWeights(Set(this))
       }
       sum
-    }
-    else 0 //input layers do not have any weights
+    } else 0 //input layers do not have any weights
+  }
+
+  /**
+   * countWeights with extra parameter to store already visited layers
+   * so recurring networks don't cause a stack overflow
+   */
+  def countWeights(done: Set[Layer]): Int = {
+    if (inputs.size != 0 && !done.contains(this)) {
+      var sum = this.size //bias weights for all neurons
+      inputs foreach { il =>
+        sum += this.size * il.size
+        sum += il.countWeights(done + this)
+      }
+      sum
+    } else 0 //input layers do not have any weights, or this layer was already visited
   }
 
   def const: Boolean = true
