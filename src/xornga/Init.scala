@@ -7,9 +7,9 @@ object Init {
 
   def main(args: Array[String]): Unit = {
     val plan = (2 lin) >> (2 tanh) >> (1 tanh)
-    var gen = new GenerationBase(for (i <- 1 to 20) yield WeightGenome.zero(plan, test)) with DetermineBest
+    val gen = new GenerationBase(for (i <- 1 to 5) yield WeightGenome.zero(plan, test)) with DetermineBest
     while (true) {
-      gen = gen.next.asInstanceOf[GenerationBase with DetermineBest]
+      gen.step()
       println(gen.best.fitness)
     }
   }

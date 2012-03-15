@@ -1,5 +1,8 @@
 package nga
 
+/**
+ * Basic implementation of a generation
+ */
 class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembers) {
 
   override def step() = {
@@ -8,7 +11,7 @@ class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembe
   }
 
   /**
-   * creates a member of the next Generation
+   * creates a member of the next generation
    */
   protected def createMember(): Genome = {
     selectParent X selectParent
@@ -20,6 +23,7 @@ class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembe
    */
   protected def selectParent: Genome = {
     import annotation.tailrec
+    val rand = util.Random
     test()
     val iter = members.iterator
     @tailrec def inner(g: Genome, p: Double): Genome = {
@@ -28,17 +32,18 @@ class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembe
       if (p2 <= 0) { return g }
       inner(iter.next, p2)
     }
-    inner(iter.next, fitsum)
+    inner(iter.next, rand.nextDouble * fitsum)
   }
 
   protected var tested = false //true if the test has run
-  protected var fitsum = 0d //the sum of fitnesses, used in roulette wheel
+  protected var fitsum = -1d //the sum of fitnesses, used in roulette wheel
 
   /**
    * tests the whole generation
    */
   protected def test() = {
     if (!tested) {
+      fitsum = 0d
       members foreach testMember _
       tested = true
     }

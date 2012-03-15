@@ -44,7 +44,7 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Genome {
    */
   override def X(that: Genome) = {
     that match {
-      case that: this.type => create(calcData(that.data))
+      case that: DoubleArrayGenome => create(calcData(that.data))
       case _ => throw new IllegalArgumentException("that must be of type DoubleArrayGenome")
     }
   }
