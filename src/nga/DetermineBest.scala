@@ -11,8 +11,8 @@ trait DetermineBest extends GenerationBase {
   }
   
   override def step()={
-    if(resetBest) _best=None
     super.step()
+    if(resetBest) _best=None
   }
   
   /**

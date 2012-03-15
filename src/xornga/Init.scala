@@ -7,7 +7,7 @@ object Init {
 
   def main(args: Array[String]): Unit = {
     val plan = (2 lin) >> (2 tanh) >> (1 tanh)
-    val gen = new GenerationBase(for (i <- 1 to 5) yield WeightGenome.zero(plan, test)) with DetermineBest
+    val gen = new GenerationBase(for (i <- 1 to 5) yield WeightGenome.zero(plan, test)) with DetermineBest with Elitism
     while (true) {
       gen.step()
       println(gen.best.fitness)
