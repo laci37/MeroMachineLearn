@@ -3,7 +3,7 @@ import nga._
 import neural._
 import neural.nga._
 class NgaStructure(out: MutableLayer, test: (Net => Double)) extends Structure(out) {
-  var maxStall = 50
+  var maxStall = 100
   var genSize = 20
   var _gen: Option[Generation] = None
   def gen() = _gen
@@ -11,7 +11,11 @@ class NgaStructure(out: MutableLayer, test: (Net => Double)) extends Structure(o
     val initGenome = Iterable.fill(genSize)(WeightGenome.zero(out, test))
     val gen = new GenerationBase(initGenome) with Elitism with StallCount
     gen.resetBest = false
-    while (gen.stall < maxStall) gen.step()
+    while (gen.stall < maxStall) {
+      print(gen.stall+" ")
+      gen.step()
+    }
+    println()
     _gen = Some(gen)
     gen.best.fitness
   }
