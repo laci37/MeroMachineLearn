@@ -2,15 +2,19 @@ package nga
 /**
  * base class for Genomes working with an array of doubles as data
  */
-abstract class DoubleArrayGenome(val data: Array[Double]) extends Genome {
+abstract class DoubleArrayGenome(val data: Array[Double]) extends Hypermutable {
+
+  private var _xover = 0.5d
   /**
    * the rate of crossovers
    */
-  def xover = 0.5d
+  def xover = _xover
+
+  private var _mut = 0.1d
   /**
    *  rate of mutation
    */
-  def mut = 0.1d
+  def mut = _mut
   /**
    *   magnitude of mutations
    */
@@ -46,6 +50,17 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Genome {
     that match {
       case that: DoubleArrayGenome => create(calcData(that.data))
       case _ => throw new IllegalArgumentException("that must be of type DoubleArrayGenome")
+    }
+  }
+
+  private var _hyper = false
+  override def hypermutate() = _hyper
+  override def hypermutate_=(value: Boolean) = {
+    _hyper = value
+    if (_hyper) {
+      _mut = 0.5d
+    } else {
+      _mut = 0.1d
     }
   }
 }
