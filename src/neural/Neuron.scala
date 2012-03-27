@@ -2,7 +2,7 @@ package neural
 import scala.collection
 import scala.collection.mutable.Map
 
-class Neuron(val actfunc: Double => Double) {
+class Neuron(val actfunc: Double => Double) extends Serializable{
   //the inputs of the neuron, and their weights
   var inputs: Map[Neuron, Double] = Map[Neuron, Double]()
   var poutput = 0d

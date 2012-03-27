@@ -3,7 +3,7 @@ package nga
 /**
  * each Genome object represents one allele
  */
-trait Genome {
+trait Genome extends Serializable{
   /**
    * fitness of the allele, should be nonnegative for compatibility with GenerationBase
    * should be overriden with a lazy val 

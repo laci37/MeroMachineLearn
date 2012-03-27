@@ -1,6 +1,6 @@
 package nga
 
-abstract class Generation(initMembers: Iterable[Genome]) {
+abstract class Generation(initMembers: Iterable[Genome]) extends Serializable{
   /**
    * step to the next generation
    */

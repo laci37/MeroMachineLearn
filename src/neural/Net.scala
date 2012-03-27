@@ -1,7 +1,7 @@
 package neural
 import scala.collection.parallel.mutable.ParArray
 import scala.annotation.tailrec
-trait Net {
+trait Net extends Serializable{
   var neurons: ParArray[Neuron] //all calculating neurons
   var inputs: ParArray[Input] //inputs 
   var outputs: ParArray[Neuron] //outputs, also referenced in neurons

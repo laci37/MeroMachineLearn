@@ -2,7 +2,7 @@ package neural.dsl
 import neural._
 import scala.collection.mutable.Seq
 
-class Layer(private val _size: Int, private val _actfunc: Double => Double) {
+class Layer(private val _size: Int, private val _actfunc: Double => Double) extends Serializable {
   var inputs: Seq[Layer] = Seq.empty
   var debug: String = ""
   def size() = _size

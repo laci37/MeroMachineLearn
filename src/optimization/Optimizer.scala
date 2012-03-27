@@ -1,6 +1,6 @@
 package optimization
 import annotation.tailrec
-class Optimizer(val init: State, _acceptRise: Double) {
+class Optimizer(val init: State, _acceptRise: Double) extends Serializable{
   var curState = init
   var curCost: Double = curState.cost
   var accept: Double = 0d
