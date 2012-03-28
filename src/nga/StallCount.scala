@@ -18,4 +18,6 @@ trait StallCount extends GenerationBase with DetermineBest {
   var minDiff = 1e-6
 
   def stall(): Int = _stall
+  
+  override def toString()= super.toString + " with StallCount"
 }

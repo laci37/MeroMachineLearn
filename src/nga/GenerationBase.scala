@@ -55,4 +55,6 @@ class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembe
   protected def testMember(g: Genome) = {
     fitsum += g.fitness
   }
+  
+  override def toString()="GenerationBase"
 }

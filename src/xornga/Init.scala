@@ -7,11 +7,15 @@ object Init {
 
   def main(args: Array[String]): Unit = {
     val plan = (2 lin) >> (2 tanh) >> (1 tanh)
-    val gen = new GenerationBase(for (i <- 1 to 5) yield WeightGenome.zero(plan, test)) with DetermineBest with Elitism
-    while (true) {
+    val gen = new GenerationBase(for (i <- 1 to 20) yield WeightGenome.zero(plan, test)) 
+       with Elitism //with TriggeredHypermutation
+    var c = 0
+    while (gen.best.fitness < 1 - 1e-6) {
       gen.step()
       println(gen.best.fitness)
+      c += 1
     }
+    println(c)
   }
 
   def test(n: Net): Double = {

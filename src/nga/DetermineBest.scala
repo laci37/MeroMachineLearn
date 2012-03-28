@@ -27,5 +27,6 @@ trait DetermineBest extends GenerationBase {
     if (_best.isEmpty) _best = Some(g)
     else if (_best.get.fitness < g.fitness()) _best = Some(g)
   }
-
+  
+  override def toString()= super.toString + " with DetermineBest"
 }

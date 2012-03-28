@@ -14,4 +14,6 @@ trait Elitism extends GenerationBase with DetermineBest {
       best
     } else super.createMember
   }
+  
+  override def toString()= super.toString + " with Elitism"
 }
