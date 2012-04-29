@@ -38,6 +38,6 @@ class TSPState(val permut: List[City], val graph: CityGraph) extends State with 
     new TSPState(newpermut.asInstanceOf[List[City]], graph)
   }
   
-  override def toString()="TspState["+this.cost.toString+";"+permut+";"+graph+"]"
+  override def toString()="TspState["+this.cost.toString+"]"
 
 }

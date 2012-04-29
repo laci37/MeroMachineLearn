@@ -1,17 +1,17 @@
 package tspsa
 import tsp.{ CityGraph, City }
 import collection.mutable.Map
-import sa.Optimizer
+import sa._
 object TspsaApp extends App {
   val graph = new CityGraph((for (i <- Range(0, 50)) yield new City(Map.empty[Int, Double],i)).toList)
   for (i <- (0 to 48)) for (j <- (1 to 49)) if (j > i) {
     graph.setDist(i, j, math.round(20d * math.abs(math.sin(i + j))).toInt)
   }
-  val problem = new TspProblem(graph,64000d)
-  for (i <- (1 to 50)) {
-    val opt = new Optimizer(problem)
-    println(opt.optimize.energy)
-  }
+  val problem = new TspProblem(graph,2500d)
+  println(System.currentTimeMillis())
+  val opt = new Optimizer(problem)
+  println(opt.optimize.asInstanceOf[State].energy)
+  println(System.currentTimeMillis())
 }
 
 class SqTspProblem(graph:CityGraph,initialTemp:Double) extends TspProblem(graph,initialTemp)

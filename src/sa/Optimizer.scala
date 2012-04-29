@@ -5,15 +5,18 @@ class Optimizer(val prob: Problem) {
   var temp = prob.initialTemp
   var optimum = curState
   val rand = util.Random
-  
-  @tailrec final def optimize(): State = {
-    val neighbor = curState.neighbor
-    if (prob.probability(curState, neighbor, temp) > rand.nextDouble()) {
-      curState = neighbor
-      if (curState.energy < optimum.energy) optimum = curState
+
+  def optimize():AnyRef = {
+    @tailrec def inner(): State = {
+      val neighbor = curState.neighbor
+      if (prob.probability(curState, neighbor, temp) > rand.nextDouble()) {
+        curState = neighbor
+        if (curState.energy < optimum.energy) optimum = curState
+      }
+      temp = prob.cool(temp)
+      if (temp <= 0) return optimum
+      inner()
     }
-    temp = prob.cool(temp)
-    if (temp <= 0) return optimum
-    optimize()
+    inner()
   }
 }

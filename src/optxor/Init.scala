@@ -7,10 +7,16 @@ object Init {
   def main(args: Array[String]) = {
     val plan=(2 lin) >> (2 tanh) >> (1 tanh)
     val opt= new HeuristicRiseOptimizer(new WeightState(new Array[Double](9),plan,xorTest))
-    while(true){
+    var c=0
+    println("OptXorStart")
+    println(System.currentTimeMillis())
+    while(opt.optimalCost>0){
       opt.optimize(1)
-      println(opt.optimalCost)
+      println(opt.curCost+";"+opt.optimalCost)
+      c+=1
     }
+    println(c)
+    println(System.currentTimeMillis())
   }
   
   def xorTest(n: Net):Double={

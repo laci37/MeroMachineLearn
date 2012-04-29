@@ -10,12 +10,15 @@ object Init {
     val gen = new GenerationBase(for (i <- 1 to 20) yield WeightGenome.zero(plan, test)) 
        with Elitism //with TriggeredHypermutation
     var c = 0
-    while (gen.best.fitness < 1 - 1e-6) {
+    println("xorngastart")
+    println(System.currentTimeMillis())
+    while (gen.best.fitness < 1 && c < 1000000) {
       gen.step()
       println(gen.best.fitness)
       c += 1
     }
     println(c)
+    println(System.currentTimeMillis())
   }
 
   def test(n: Net): Double = {

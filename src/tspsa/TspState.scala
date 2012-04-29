@@ -39,6 +39,6 @@ class TspState(permut: List[City]) extends State with Serializable{
   }
   
   override def toString()={
-    "TspState["+energy+";"+permut+"]"
+    "TspState["+energy+"]"
   }
 }
