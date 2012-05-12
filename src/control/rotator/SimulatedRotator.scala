@@ -25,16 +25,28 @@ class SimulatedRotator(val theta: Double, initpos: Double) extends Rotator {
    * do a timestep of dt time
    */
   def timestep(dt: Double) = {
-    var acc = 0d
-    for (i <- (1 to iterations)) {
-      torques foreach { f =>
-        acc += f(pos, vel, acc) / theta
-      }
+    def inner(pos: Double, vel: Double, acc: Double, c: Int): Double = {
+      var newacc = calc(pos, vel, acc)
+      if (c <= 0) return newacc
+      inner(pos, vel, newacc, c - 1)
     }
-    if (vel == 0) acc -= min(acc, signum(acc) * stcFriction / theta)
-    else acc -= acc -= min(acc, signum(acc) * dynFriction / theta)
-    vel += acc * dt
-    pos += vel * dt
+    var acc = inner(pos, vel, 0, iterations)
+    if (vel == 0) acc -= signum(acc) * min(abs(acc), stcFriction / theta)
+    else acc -= signum(acc) * min(abs(acc), dynFriction / theta)
+    _vel += acc * dt
+    _pos += vel * dt
+    pos
+  }
+
+  /**
+   * a single step of calculation
+   */
+  def calc(pos: Double, vel: Double, acc: Double) = {
+    var newacc = 0d
+    torques foreach { f =>
+      newacc += f(pos, vel, acc) / theta
+    }
+    newacc
   }
 
   /**
@@ -54,6 +66,17 @@ object SimulatedRotator {
 
   //some useful torque functions
 
-  def load(theta: Double)(pos: Double, vel: Double, acc: Double) = -theta * acc
+  def load(theta: Double)(pos: Double, vel: Double, acc: Double) =
+    -theta * acc
 
+  //gravity acts here in the direction 3/2*pi and g=1
+  def eccentricLoad(mass: Double, dist: Double)(pos: Double, vel: Double, acc: Double) =
+    -mass * cos(pos) * dist - mass * dist * acc
+      
+  def spring(springConst: Double, zeroPoint: Double)(pos: Double, vel: Double, acc: Double) =
+    springConst * (zeroPoint - pos)
+
+  def resistance(coeff: Double)(pos: Double, vel: Double, acc: Double) =
+    -vel * vel * coeff
+  
 }
