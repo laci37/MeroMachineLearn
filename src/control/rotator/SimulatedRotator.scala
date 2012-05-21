@@ -14,7 +14,7 @@ class SimulatedRotator(val theta: Double, initpos: Double) extends Rotator {
   /**
    * collection of interacting torques
    */
-  var torques: Iterable[TorqueFunc] = Seq.empty[TorqueFunc]
+  var torques: Seq[TorqueFunc] = Seq.empty
 
   /**
    * iterations per timestep
