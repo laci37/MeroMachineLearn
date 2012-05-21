@@ -121,7 +121,7 @@ class DefaultMutagen extends Mutagen {
   var lastfit = 0.d
   var fit = 0.01d
   var state: State = Begin
-  val rand = util.Random
+  val rand = scala.util.Random
   var gen = 0
   var wratecorr = 0d
   var wmagcorr = 0d

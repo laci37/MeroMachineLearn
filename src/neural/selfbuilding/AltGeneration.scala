@@ -4,7 +4,7 @@ import neural.dsl._
 import annotation.tailrec
 class AltGeneration(var members: ParArray[GrowingGenome], val test: AltTester, var mut: Mutagen) {
   var gen = 0
-  val rand = util.Random
+  val rand = scala.util.Random
   var best = 0d
   var flat = 0
   def generate() = {
@@ -20,7 +20,7 @@ class AltGeneration(var members: ParArray[GrowingGenome], val test: AltTester, v
     println(fitsum)
 
     val sorted = members.toArray
-    util.Sorting.quickSort(sorted)
+    scala.util.Sorting.quickSort(sorted)
     println("Best: " + sorted(sorted.size - 1).fit)
     mut.updateFit(fitsum)
     val newmembers = new ParArray[GrowingGenome](members.size)

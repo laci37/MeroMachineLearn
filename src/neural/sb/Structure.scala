@@ -6,7 +6,7 @@ import annotation.tailrec
 abstract class Structure(val out: MutableLayer) extends State {
   def layers = _layers
   private var _layers = Layer.discover(out)
-  val rand = util.Random
+  val rand = scala.util.Random
   def baseCost(): Double
 
   def cost(): Double = {

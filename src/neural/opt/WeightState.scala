@@ -15,7 +15,7 @@ class WeightState(data: Array[Double], val plan: Layer, val test: (Net => Double
 
   def neighbor(): State = {
     //change weights randomly 
-    val rand = util.Random
+    val rand = scala.util.Random
     val newdata = new Array[Double](data.size)
     data.copyToArray(newdata)
     for (i <- (0 to data.size - 1))

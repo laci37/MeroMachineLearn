@@ -23,7 +23,7 @@ class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembe
    */
   protected def selectParent: Genome = {
     import annotation.tailrec
-    val rand = util.Random
+    val rand = scala.util.Random
     test()
     val iter = members.iterator
     @tailrec def inner(g: Genome, p: Double): Genome = {

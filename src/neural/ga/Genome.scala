@@ -26,7 +26,7 @@ class Genome(val data: Array[Double], val l: Layer) {
    * hybridize operator
    */
   def X(other: Genome): Genome = {
-    val rand = util.Random
+    val rand = scala.util.Random
     var p = this //the parent currently being copied 
     val newdata = for (i <- Range(0, data.length)) yield {
       if (rand.nextDouble() < xover) {
@@ -75,7 +75,7 @@ object Genome {
     }
     discover(l)
     var data = new Array[Double](ndata)
-    val rand = util.Random
+    val rand = scala.util.Random
     for (i <- Range(0, ndata)) { data(i) = rand.nextDouble() - 0.5 }
     new Genome(data, l)
   }

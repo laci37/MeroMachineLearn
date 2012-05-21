@@ -25,7 +25,7 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Hypermutable {
    */
   protected def calcData(that: Array[Double]): Array[Double] = {
     if (that.size != data.size) throw new IllegalArgumentException("The size of the two arrays must be equal!")
-    val rand = util.Random
+    val rand = scala.util.Random
     var p = this.data //the parent currently being copied 
     val newdata = for (i <- Range(0, data.length)) yield {
       if (rand.nextDouble() < xover) { //change parent with crossover

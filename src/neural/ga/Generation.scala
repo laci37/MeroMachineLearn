@@ -8,7 +8,7 @@ class Generation(val members: ParArray[Genome], val test: Tester) {
   var best = members(0)
   var worst = members(0)
   def generateEx(size: Int): (Generation, Double) = {
-    val rand = util.Random
+    val rand = scala.util.Random
     members foreach (m => {
       m.fit = test.test(m);
       fitsum += m.fit;

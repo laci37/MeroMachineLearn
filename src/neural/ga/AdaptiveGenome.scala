@@ -24,7 +24,7 @@ object AdaptiveGenome {
     }
     discover(l)
     var data = new Array[Double](ndata)
-    val rand = util.Random
+    val rand = scala.util.Random
     for (i <- Range(0, ndata)) { data(i) = rand.nextDouble() - 0.5 }
     new AdaptiveGenome(data, l)
   }

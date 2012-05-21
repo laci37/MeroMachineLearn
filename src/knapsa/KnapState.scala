@@ -10,7 +10,7 @@ class KnapState(val sackSize: Double, val itemSet: List[Item], val items: List[I
   }
 
   override def neighbor() = {
-    val rand = util.Random
+    val rand = scala.util.Random
     val addIndex = rand.nextInt(itemSet.size - items.size)
     def item2Add(curr: Int, dist: Int): Item = {
       if (!items.contains(itemSet(curr))) {

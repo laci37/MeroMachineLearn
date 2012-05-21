@@ -4,7 +4,7 @@ class Optimizer(val prob: Problem) {
   var curState = prob.initialState
   var temp = prob.initialTemp
   var optimum = curState
-  val rand = util.Random
+  val rand = scala.util.Random
 
   def optimize():AnyRef = {
     @tailrec def inner(): State = {
