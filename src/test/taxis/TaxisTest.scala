@@ -5,7 +5,7 @@ import neural.ga._
 object TaxisTest extends Tester {
 
   def test(g: Genome): Double = {
-    val rand = new util.Random
+    val rand = new scala.util.Random
     val n = g.decode()
     var sum = 0d
     for (j <- (1 to 1)) {

@@ -12,7 +12,7 @@ object MyTest extends Tester {
     import javax.imageio._
     import java.io.File
     val image: BufferedImage = ImageIO.read(new File("test.jpg"))
-    val rand = util.Random
+    val rand = scala.util.Random
     val x = rand.nextInt(image.getWidth - 8)
     val y = rand.nextInt(image.getHeight - 8)
     val n = if (bdr.isEmpty) g.decode()
