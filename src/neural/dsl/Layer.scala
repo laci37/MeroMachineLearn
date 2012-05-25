@@ -20,6 +20,10 @@ class Layer(private val _size: Int, private val _actfunc: Double => Double) exte
   def addInput(il: Layer) = {
     inputs = inputs :+ il
   }
+  
+  def removeInput(il: Layer) = {
+    inputs = inputs diff Seq(il)
+  }
 
   override def clone() = {
     val clonedinputs = new Array[Layer](inputs.size)

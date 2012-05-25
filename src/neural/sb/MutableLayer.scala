@@ -53,7 +53,7 @@ class MutableLayer(actdecode: (Int => (Double => Double)), initsize: Int, overri
     } else None
   }
 
-  def removeInput(il: Layer) = {
+  override def removeInput(il: Layer) = {
     if (!_lock) inputs = inputs diff Seq(il)
   }
 

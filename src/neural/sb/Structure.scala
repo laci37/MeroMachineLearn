@@ -37,6 +37,7 @@ abstract class Structure(val out: MutableLayer) extends State {
   def insertLayer = clone.asInstanceOf[Structure]._insertLayer
   def addConnection = clone.asInstanceOf[Structure]._addConnection
   def removeNeuron = clone.asInstanceOf[Structure]._removeNeuron
+  def removeLayer = clone.asInstanceOf[Structure]._removeLayer
 
   //mutable state changes
   protected def _mutActFunc: Structure = {
@@ -66,6 +67,18 @@ abstract class Structure(val out: MutableLayer) extends State {
   protected def _removeNeuron() = {
     randomMutableLayer.removeNeuron()
     this
+  }
+
+  protected def _removeLayer() = {
+    val toRemove = randomMutableLayer
+    val outputs = for(l<-layers if(l.inputs.contains(toRemove))) yield l
+    outputs foreach {ol=>
+      ol.removeInput(toRemove)
+      toRemove.inputs foreach {il=>
+        il >> ol  
+      }
+    }
+    _layers= _layers diff Seq(toRemove)
   }
 
   protected def randomLayer = {
