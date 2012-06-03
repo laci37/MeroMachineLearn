@@ -2,7 +2,7 @@ package neural
 import scala.collection
 import scala.collection.mutable.Map
 
-class Neuron(val actfunc: Double => Double) extends Serializable{
+class Neuron(val actfunc: Double => Double) extends Serializable {
   //the inputs of the neuron, and their weights
   var inputs: Map[Neuron, Double] = Map[Neuron, Double]()
   var poutput = 0d
@@ -29,6 +29,11 @@ class Neuron(val actfunc: Double => Double) extends Serializable{
 
     ret
   }
+
+  def reset() = {
+    poutput = 0d
+    pnextout = 0d
+  }
 }
 
 object Neuron {
@@ -48,6 +53,7 @@ object Neuron {
     inputs.foreach(in => (n.inputs += ((in, rand.nextDouble()))))
     n
   }
-  
-  implicit def Neuron2Double(n: Neuron):Double= n.output
+
+  implicit def Neuron2Double(n: Neuron): Double = n.output
+
 }

@@ -1,4 +1,4 @@
-package sbxor
+package test.sbxor
 
 object Init {
 

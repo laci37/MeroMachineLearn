@@ -1,4 +1,4 @@
-package sbxor
+package test.sbxor
 import actors.Actor
 object Input extends Actor{
 	def act={

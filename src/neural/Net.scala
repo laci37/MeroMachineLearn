@@ -1,7 +1,7 @@
 package neural
 import scala.collection.parallel.mutable.ParArray
 import scala.annotation.tailrec
-trait Net extends Serializable{
+trait Net extends Serializable {
   var neurons: ParArray[Neuron] //all calculating neurons
   var inputs: ParArray[Input] //inputs 
   var outputs: ParArray[Neuron] //outputs, also referenced in neurons
@@ -41,7 +41,10 @@ trait Net extends Serializable{
     }
     inner(Change)
   }
-
+  
+  def reset() = {
+    neurons foreach { n => n.reset }
+  }
 }
 
 abstract class TimestepReturns

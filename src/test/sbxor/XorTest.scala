@@ -1,4 +1,4 @@
-package sbxor
+package test.sbxor
 
 import neural.ga._
 import actors.Futures._

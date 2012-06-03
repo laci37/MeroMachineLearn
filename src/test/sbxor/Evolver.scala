@@ -1,4 +1,4 @@
-package sbxor
+package test.sbxor
 import actors.Actor
 import optimization._
 import neural.dsl._

@@ -1,4 +1,4 @@
-package growtest
+package test.growtest
 
 import actors.Actor
 import neural.selfbuilding._

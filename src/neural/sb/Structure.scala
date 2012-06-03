@@ -28,12 +28,12 @@ abstract class Structure(val out: MutableLayer) extends State {
   def neighbor(): State = {
     val r = rand.nextDouble()
     r match {
-      case a if a < 1/7d => mutActFunc
-      case a if a < 2/7d => addNeuron
-      case a if a < 3/7d => insertLayer
-      case a if a < 4/7d => removeNeuron
-      case a if a < 5/7d => removeLayer
-      case a if a < 6/7d => removeConnection
+      case a if a < 1 / 7d => mutActFunc
+      case a if a < 2 / 7d => addNeuron
+      case a if a < 3 / 7d => insertLayer
+      case a if a < 4 / 7d => removeNeuron
+      case a if a < 5 / 7d => removeLayer
+      case a if a < 6 / 7d => removeConnection
       case _ => addConnection
     }
   }
@@ -101,6 +101,7 @@ abstract class Structure(val out: MutableLayer) extends State {
       inner
     }
     inner
+    trim
     this
   }
 
@@ -114,7 +115,19 @@ abstract class Structure(val out: MutableLayer) extends State {
     }
     return false
   }
-  
+
+  protected def trim() = {
+    def inner(l:Layer):Unit={
+      l.inputs foreach{il=>
+        if(il.inputs.isEmpty && il!=input){
+          l.inputs= l.inputs diff Seq(il)
+          _layers = _layers diff Seq(il)
+        }
+        else inner(il)
+      }
+    }
+    inner(out)
+  }
 
   protected def randomLayer = {
     layers(rand.nextInt(layers.length))
