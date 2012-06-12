@@ -3,7 +3,7 @@ package nga
  * base class for Genomes working with an array of doubles as data
  */
 abstract class DoubleArrayGenome(val data: Array[Double]) extends Hypermutable {
-
+  val rand = scala.util.Random
   private var _xover = 0.5d
   /**
    * the rate of crossovers
@@ -25,17 +25,20 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Hypermutable {
    */
   protected def calcData(that: Array[Double]): Array[Double] = {
     if (that.size != data.size) throw new IllegalArgumentException("The size of the two arrays must be equal!")
-    val rand = scala.util.Random
     var p = this.data //the parent currently being copied 
     val newdata = for (i <- Range(0, data.length)) yield {
       if (rand.nextDouble() < xover) { //change parent with crossover
         if (p == this.data) p = that
         else p = this.data
       }
-      if (rand.nextDouble() < mut) p(i) + (rand.nextGaussian) * mut2 //mutation
-      else p(i) //normal copy
+      mutateDouble(p(i))
     }
     newdata.toArray
+  }
+  
+  protected def mutateDouble(d:Double):Double={
+    if (rand.nextDouble() < mut) d + (rand.nextGaussian) * mut2
+    else d
   }
 
   /**
