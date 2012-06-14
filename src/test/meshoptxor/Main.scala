@@ -4,7 +4,7 @@ import neural.meshed._
 import actors.Futures._
 object Main {
 
-  def main(args: Array[String]) = {
+  def main(args: Array[String]):Unit = {
     val opt = new MeshOptimizer(2, 1, test, 0.999)
     opt.optimize()
   }

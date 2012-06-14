@@ -7,9 +7,7 @@ class MeshOptimizer(nInputs: Int, minNeurons: Int, test: (Net => Double), limit:
     var nNeurons = minNeurons
     var best: State = null
     do {
-      println("n="+nNeurons)
       best = getBest(nNeurons)
-      println(best.energy)
       nNeurons += 1
     } while (best.energy > limit)
     best
@@ -23,7 +21,6 @@ class MeshOptimizer(nInputs: Int, minNeurons: Int, test: (Net => Double), limit:
     var stall = 0
     var lastEnergy = Double.PositiveInfinity
     def stop(s: State, c: Int): Boolean = {
-      println(stall)
       if (s.energy <= limit) true
       else {
         if (s.energy+changeLimit < lastEnergy) {
@@ -41,8 +38,8 @@ class MeshOptimizer(nInputs: Int, minNeurons: Int, test: (Net => Double), limit:
 
     val opt = new OptimizerBase(new MeshWeightState(
       new Array[Double](nNeurons * (nNeurons + nInputs + 1)),
-      nInputs, nNeurons, test))
-
+      nInputs, nNeurons, test))  with StateLogging
+    opt.out= new java.io.FileWriter("meshopt_"+nNeurons+".log")
     opt.optimize(stop _)
   }
 
