@@ -12,12 +12,13 @@ class MeshWeightState(weights: Array[Double], nInputs: Int, nNeurons: Int, test:
 
   override def mutateDouble(d: Double) = {
     import math._
-    if (rand.nextDouble < (2d / weights.size)) {
+    if (rand.nextDouble < 0.2) d * (rand.nextDouble() + 0.5) 
+    else if (rand.nextDouble < 0.01) 0d
+    else if (rand.nextDouble < (1d/weights.size)) {
       val change = (rand.nextDouble - 0.5) * 0.1
       if (signum(d) == signum(change) && abs(d) < abs(change)) 0d
       else d - change
-    } else if (rand.nextDouble < 0.001) 0d
-    else d
+    } else d
   }
 
   override def toString() =
