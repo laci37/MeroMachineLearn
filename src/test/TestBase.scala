@@ -12,9 +12,11 @@ abstract class TestBase() {
 
   def main(): Unit = {
     @tailrec def loop(): Unit = {
-      if (!loopBody) return
+      loopBody
       loop
     }
+    //call loop
+    loop
   }
 
   /**
