@@ -8,12 +8,13 @@ class MeshOptimizer(nInputs: Int, minNeurons: Int, test: (Net => Double), limit:
     var best: State = null
     do {
       best = getBest(nNeurons)
+      println(best)
       nNeurons += 1
     } while (best.energy > limit)
     best
   }
 
-  var stallLimit = 1000
+  var stallLimit = 10000
   var changeLimit=0.001
 
   def getBest(nNeurons: Int) = {
@@ -35,9 +36,15 @@ class MeshOptimizer(nInputs: Int, minNeurons: Int, test: (Net => Double), limit:
       }
     }
     //closure end
-
+    
+    //random initialization function
+    def initArray(size:Int)={
+      val rand=scala.util.Random
+      (for(i<-(1 to size)) yield rand.nextDouble-0.5).toArray
+    }
+    
     val opt = new OptimizerBase(new MeshWeightState(
-      new Array[Double](nNeurons * (nNeurons + nInputs + 1)),
+      initArray(nNeurons * (nNeurons + nInputs + 1)),
       nInputs, nNeurons, test))  with StateLogging
     opt.out= new java.io.FileWriter("meshopt_"+nNeurons+".log")
     opt.optimize(stop _)
