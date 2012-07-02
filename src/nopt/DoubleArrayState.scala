@@ -1,5 +1,8 @@
 package nopt
 
+/**
+ * state class for working with data as Array[Double]
+ */
 abstract class DoubleArrayState(data:Array[Double]) extends State{
   val rand=scala.util.Random
  

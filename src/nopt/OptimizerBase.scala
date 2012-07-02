@@ -1,9 +1,15 @@
 package nopt
 import annotation.tailrec
+/**
+ * basic optimizer implementing my experimental algorithm
+ */
 class OptimizerBase(init: State) extends Optimizer(init) {
-
+  
+  /**
+   * optimizes the problem for given number of cycles
+   */
   def optimize(cycles: Int): State = {
-    //inner function to enable tailrec
+    //inner function to enable tailrec without final
     @tailrec def inner(c: Int): State = {
       if (c <= 1) return optCycle()
       optCycle()
@@ -13,8 +19,11 @@ class OptimizerBase(init: State) extends Optimizer(init) {
     inner(cycles)
   }
 
+  /**
+   * optimizes a problem, stops when the stop conditions is met (returns true)
+   */
   def optimize(stopWhen: (State, Int) => Boolean): State = {
-    //inner function to enable tailrec
+    //inner function to enable tailrec without final
     @tailrec def inner(c: Int): State = {
       val state = optCycle()
       if (stopWhen(state, c)) return state

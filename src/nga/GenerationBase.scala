@@ -29,12 +29,14 @@ class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembe
     val rand = scala.util.Random
     test()
     val iter = members.iterator
+    //this loop iterates over all 
     @tailrec def inner(g: Genome, p: Double): Genome = {
       var p2 = p
       p2 -= g.fitness
       if (p2 <= 0) { return g }
       inner(iter.next, p2)
     }
+    
     inner(iter.next, rand.nextDouble * fitsum)
   }
 
@@ -45,10 +47,10 @@ class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembe
    * tests the whole generation
    */
   protected def test() = {
-    if (!tested) {
-      fitsum = 0d
-      members foreach testMember _
-      tested = true
+    if (!tested) { //if this generation was not tested yet
+      fitsum = 0d //reset fitsum
+      members foreach testMember _ //tests all members
+      tested = true 
     }
   }
 

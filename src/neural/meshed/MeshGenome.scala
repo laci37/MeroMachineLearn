@@ -1,6 +1,9 @@
 package neural.meshed
 import nga._
 import neural._
+/**
+ * experiment for GA with defining size as a genetical property
+ */
 class MeshGenome(nInputs: Int, nNeurons: Int, weights: Array[Double], test: (Net => Double), var minNeurons: Int)
   extends DoubleArrayGenome(weights) with Decodable[MeshedNet] {
 
@@ -21,6 +24,7 @@ class MeshGenome(nInputs: Int, nNeurons: Int, weights: Array[Double], test: (Net
 
   var pAdd = 0.01d
   var pRemove = 0.005d
+  
   protected def createMutated(data: Array[Double]) = {
     val rand = scala.util.Random
     if (rand.nextDouble() < pAdd) {
