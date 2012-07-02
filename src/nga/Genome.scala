@@ -1,15 +1,17 @@
 package nga
 
 /**
- * each Genome object represents one allele
+ * The base trait for any "creature" in GA
  */
 trait Genome extends Serializable{
   /**
-   * fitness of the allele, should be nonnegative for compatibility with GenerationBase
+   * fitness of the genome, must be nonnegative for compatibility with GenerationBase
    * should be overriden with a lazy val 
    */
   def fitness():Double
   
-  //hybridize operator
+  /**
+   * hybridize operator
+   */
   def X(that: Genome):Genome
 }

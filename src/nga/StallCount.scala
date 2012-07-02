@@ -1,5 +1,7 @@
 package nga
-
+/**
+ * extension for GenerationBase, counts how long has the evolution stalled
+ */
 trait StallCount extends GenerationBase with DetermineBest {
   override def step() = {
     super.step()
@@ -9,8 +11,8 @@ trait StallCount extends GenerationBase with DetermineBest {
     } else _stall += 1
   }
   
-  protected var _globalBestScore = best.fitness
-  protected var _stall = 0
+  protected var _globalBestScore = best.fitness //keeps track of the best score achieved
+  protected var _stall = 0 //counter
 
   /**
    * The minimal difference between the new best and the old best to reset counter

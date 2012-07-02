@@ -1,5 +1,8 @@
 package nga
-
+/**
+ * extension of GenerationBase, if the evolution stalls long enough, 
+ * the mutation rates will be increased. All Genomes used must be the subclass of Hypermutable!!!
+ */
 trait TriggeredHypermutation extends GenerationBase with StallCount {
   var trigStall = 50
 

@@ -1,5 +1,8 @@
 package nga
 
+/**
+ * extension trait for GenerationBase, determines the best Genome in all generations
+ */
 trait DetermineBest extends GenerationBase {
   
   /**

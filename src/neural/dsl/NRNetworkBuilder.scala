@@ -1,8 +1,9 @@
 package neural.dsl
 import neural._
 import collection.parallel.mutable.ParArray
-/*
- * BuilderClass for non-recursive networks
+/**
+ * BuilderClass for non-recursive networks, can be used to build 
+ * single or multi-layer perceptrons
  */
 class NRNetworkBuilder(override val output: Layer) extends NetworkBuilder(output) {
   //discovering size of network with a recursive function
@@ -20,6 +21,7 @@ class NRNetworkBuilder(override val output: Layer) extends NetworkBuilder(output
   }
   discover(output)
 
+  
   override def build(cdata: Array[Double]): Net = {
     val n = new GeneralNet(nInputs, nNeurons, nOutputs)
     var dPtr = 0 //pointer in data

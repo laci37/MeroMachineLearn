@@ -1,15 +1,23 @@
 package neural
 import neural.selfbuilding._
 import neural.sb._
+/**
+ * package object for dsl, the implicit functions and classes used for the neural 
+ * network structure domain specific language are defined here
+ */
 package object dsl {
+  //cast for the class implementing extra functionality for building layers of an Int
   implicit def Int2PimpedInt(a: Int) = new PimpedInt(a)
 
   //class for extra integer methods
   class PimpedInt(val inner: Int) {
+    //these methods construct different kinds of layers
+    
     def act(func: Double => Double) = new Layer(inner, func) { debug = "custom" }
     def lin() = new Layer(inner, x => x) { debug = "lin" }
     def tanh() = new Layer(inner, x => math.tanh(x)) { debug = "tanh" }
-    //def actg(func: Double => Double) = new GrowingLayer(inner, func)
+    
+    //failed experimental layer subclasses
     def ling() = GrowingLayer(inner, 1.toByte)
     def tanhg() = GrowingLayer(inner, 0.toByte)
     def lingc() = GrowingLayer(inner, 1.toByte, true)

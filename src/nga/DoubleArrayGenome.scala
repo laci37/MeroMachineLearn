@@ -36,6 +36,9 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Hypermutable {
     newdata.toArray
   }
   
+  /**
+   * defines the mutations
+   */
   protected def mutateDouble(d:Double):Double={
     if (rand.nextDouble() < mut) d + (rand.nextGaussian) * mut2
     else d
@@ -55,7 +58,8 @@ abstract class DoubleArrayGenome(val data: Array[Double]) extends Hypermutable {
       case _ => throw new IllegalArgumentException("that must be of type DoubleArrayGenome")
     }
   }
-
+  
+  //defines hypermutations
   private var _hyper = false
   override def hypermutate() = _hyper
   override def hypermutate_=(value: Boolean) = {

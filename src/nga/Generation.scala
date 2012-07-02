@@ -1,5 +1,7 @@
 package nga
-
+/**
+ * abstract base class for GA calculating classes 
+ */
 abstract class Generation(initMembers: Iterable[Genome]) extends Serializable{
   /**
    * step to the next generation

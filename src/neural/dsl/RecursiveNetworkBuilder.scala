@@ -2,8 +2,12 @@ package neural.dsl
 import neural._
 import collection.mutable.{ Map, ArrayBuffer }
 import collection.parallel.mutable.ParArray
-class RecursiveNetworkBuilder(output: Layer) extends NetworkBuilder(output) {
 
+/**
+ * Network builder for any network
+ */
+class RecursiveNetworkBuilder(output: Layer) extends NetworkBuilder(output) {
+  //determining the size of the network
   var nInputs = 0
   var nNeurons = 0
   var nOutputs = output.size
@@ -36,7 +40,7 @@ class RecursiveNetworkBuilder(output: Layer) extends NetworkBuilder(output) {
       var ret=0d
       try ret = cdata(dPtr)
       catch {
-        case _ => println("fuck")
+        case _ => println("error")
       }
       dPtr += 1
       ret

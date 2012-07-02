@@ -1,5 +1,7 @@
 package nga
-
+/**
+ * extension for GenerationBase, the best Genome in each generation is copied over to the next
+ */
 trait Elitism extends GenerationBase with DetermineBest {
   protected var firstmember = true //true before the first member is created
   

@@ -1,10 +1,13 @@
 package nga
 
 /**
- * Basic implementation of a generation
+ * Basic implementation of a Generation
  */
 class GenerationBase(initMembers: Iterable[Genome]) extends Generation(initMembers) {
 
+  /**
+   * steps to the next generation
+   */
   override def step() = {
     _members = for (i <- (1 to members.size)) yield { createMember }
     tested = false
