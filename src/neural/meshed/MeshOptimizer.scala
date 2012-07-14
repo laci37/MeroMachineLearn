@@ -1,6 +1,7 @@
 package neural.meshed
-import neural._
 import nopt._
+import neural._
+
 /**
  * experiment for optimization algorithm to find the best MeshedNet for a problem
  * nInputs: the number of inputs for the network

@@ -14,3 +14,5 @@ trait Input extends Neuron {
   
   def output_=(a: Double): Unit = poutput = a
 }
+
+class InputNeuron extends Neuron(x=>x) with Input
