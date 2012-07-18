@@ -18,7 +18,7 @@ class ContextHopNet(size: Int, nContextUnits: Int, initWeight: Double)
     for (i <- (size to neurons.size - 1)) {
       neurons(i) = new HebbNeuron()
       for (j <- (0 to i - 1)) {
-        neurons(i).inputs += (neurons(j) -> rand.nextDouble * 0.1)
+        neurons(i).inputs += (neurons(j) -> rand.nextDouble * (10d/size))
         neurons(j).inputs += (neurons(i) -> initWeight)
       }
     }

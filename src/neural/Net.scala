@@ -77,6 +77,7 @@ trait Net extends Serializable {
   def reset() = {
     neurons foreach { n => n.reset }
   }
+  
 }
 
 // abstract class and case classes used in Net.calc and Net.timestep
