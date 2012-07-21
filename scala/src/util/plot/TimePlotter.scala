@@ -18,7 +18,6 @@ class TimePlotter(lines: (Color, Stroke)*) extends Plotter {
     for (i <- (0 to values.size - 1)) {
       graphs(i)._1.append(new Point((time * xscale).toInt, (xaxis - values(i) * yscale).toInt))
     }
-    repaint()
   }
 
   override def paintComponent(g: Graphics) = {

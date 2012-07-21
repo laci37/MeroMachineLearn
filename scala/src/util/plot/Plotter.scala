@@ -3,7 +3,9 @@ import javax.swing.JPanel
 import java.awt._
 import collection.mutable.ListBuffer
 class Plotter() extends JPanel {
+  
   var graphs: Seq[(ListBuffer[Point], Color, Stroke)] = Seq()
+  
   override def paintComponent(g: Graphics) = {
     val g2d = g.asInstanceOf[Graphics2D]
     graphs foreach { data =>
@@ -17,5 +19,10 @@ class Plotter() extends JPanel {
           points(i + 1).y)
       }
     }
+  }
+  
+  def clear()={
+    graphs foreach { g=> g._1.clear()}
+    this.repaint()
   }
 }
