@@ -5,7 +5,7 @@
  *      Author: mero
  */
 
-#include "include/CMatrix.h"
+#include "../include/CMatrix.h"
 
 CMatrix::CMatrix() {
 	this->arr = new double[1][1];
@@ -18,10 +18,6 @@ CMatrix::CMatrix(int rows, int cols) {
 	this->arr = new double[rows][cols];
 	this->rows = rows;
 	this->cols = cols;
-	for (int i = 0; i < rows; i++)
-		for (int j = 0; j < rows; j++) {
-			arr[i][j] = 0;
-		}
 }
 
 CMatrix::CMatrix(int rows, int cols, double initval) {
@@ -57,37 +53,61 @@ CMatrix& CMatrix::operator =(const CMatrix that) {
 	this->arr = new double[this->rows][this->cols];
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < cols; j++) {
-			arr[i][j] = that.get(i, j);
+			arr[i][j] = that.get;
 		}
 	return this;
 }
 
-CMatrix& CMatrix::operator *=(const CMatrix that) {
+CMatrix& CMatrix::operator *=(const double that) {
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < cols; j++) {
-			arr[i][j] = that.get;
+			arr[i][j] *= that;
 		}
-}
-
-CMatrix& CMatrix::operator *=(const double that) {
+	return this;
 }
 
 CMatrix& CMatrix::operator +=(const CMatrix that) {
+	for (int i = 0; i < rows; i++)
+		for (int j = 0; j < cols; j++) {
+			arr[i][j] += that.get;
+		}
+	return this;
 }
 
 CMatrix& CMatrix::operator -=(const CMatrix that) {
+	for (int i = 0; i < rows; i++)
+		for (int j = 0; j < cols; j++) {
+			arr[i][j] -= that.get;
+		}
+	return this;
 }
 
 const CMatrix CMatrix::operator *(const CMatrix that) {
+	CMatrix res = new CMatrix(rows, that.cols, 0.0);
+	for (int i = 0; i < rows; i++)
+		for (int j = 0; j < that.cols; j++)
+			for (int k = 0; k < cols; k++) {
+				res.arr[i][j] += arr[i][k] * that.get(k, j);
+			}
+	return res;
 }
 
 const CMatrix CMatrix::operator *(const double that) {
+	CMatrix res = &this;
+	res *= that;
+	return res;
 }
 
 const CMatrix CMatrix::operator +(const CMatrix that) {
+	CMatrix res = &this;
+	res += that;
+	return res;
 }
 
 const CMatrix CMatrix::operator -(const CMatrix that) {
+	CMatrix res = &this;
+	res -= that;
+	return res;
 }
 
 const CVector CMatrix::operator [](const int subscript) {

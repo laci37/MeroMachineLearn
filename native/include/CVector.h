@@ -8,7 +8,7 @@
 #ifndef CVECTOR_H_
 #define CVECTOR_H_
 
-#include "include/CMatrix.h"
+#include "CMatrix.h"
 
 class CVector: public CMatrix {
 public:

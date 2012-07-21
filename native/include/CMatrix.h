@@ -7,13 +7,14 @@
 
 #ifndef CMATRIX_H_
 #define CMATRIX_H_
+#include "CVector.h"
 
 class CMatrix {
 public:
 	CMatrix();
 	CMatrix(int rows, int cols);
 	CMatrix(int rows, int cols, double initval);
-	CMatrix(int rows, int cols, double initarr[][]);
+	CMatrix(int rows, int cols, double initarr[]);
 	CMatrix& operator=(const CMatrix that);
 	CMatrix& operator*=(const CMatrix that);
 	CMatrix& operator*=(const double that);
@@ -28,7 +29,7 @@ public:
 	void set(int row, int col, double value);
 	virtual ~CMatrix();
 private:
-	double arr[][];
+	double arr[];
 	int rows, cols;
 };
 
