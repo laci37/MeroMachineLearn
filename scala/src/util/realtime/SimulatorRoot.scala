@@ -8,4 +8,10 @@ class SimulatorRoot(objects: Set[Simulable]) extends Simulator(objects) {
     super.timestep(dt)
     update()
   }
+  
+  def simulate(step:Double,c:Int)={
+    for(i<-(1 to c)){
+      timestep(step)
+    }
+  }
 }
