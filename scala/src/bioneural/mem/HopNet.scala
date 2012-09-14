@@ -79,7 +79,7 @@ class HopNet(val size: Int) extends Simulable {
   }
   def createLDC(): LargeDataCollector = {
     if (ldc.isEmpty) {
-      val func = new ArrayBuffer[Unit => Double](size * (3 + (size - 1) * 3))
+      val func = new ArrayBuffer[() => Double](size * (3 + (size - 1) * 3))
       val meta = new ArrayBuffer[String](size * (2 + (size - 1) * 3))
       for (i <- (0 to size - 1)) {
         1

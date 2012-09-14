@@ -1,7 +1,7 @@
 package util.realtime
 import collection.mutable.ArrayBuffer
 import java.io._
-class LargeDataCollector(datastream: Seq[Unit ⇒ Double]) extends Simulable {
+class LargeDataCollector(datastream: Seq[() ⇒ Double]) extends Simulable {
   val buff = new ArrayBuffer[(Double, Array[Double])]
   val tmpfile = getTempFile()
   val tmpfilestr = new RandomAccessFile(tmpfile, "rw")

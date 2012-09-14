@@ -25,7 +25,7 @@ trait Net extends Serializable {
         overflow |= n.calc()
     }
 
-    var change = false //will be set true if any neurons changes its output
+    var change = false //will be set true if any neuron changes its output
     neurons foreach (n => change |= n.timestep())
 
     if (overflow) Overflow
