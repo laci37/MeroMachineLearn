@@ -37,7 +37,7 @@ class HopNet(protected val size: Int, initWeight:Double) extends Net {
 
  def this(size: Int) = this(size, 0d)
     
-  def mu()=neurons(0).asInstanceOf[HebbNeuron].mu
+  def mu=neurons(0).asInstanceOf[HebbNeuron].mu
   
   def mu_=(value:Double)={
     neurons foreach{n=>

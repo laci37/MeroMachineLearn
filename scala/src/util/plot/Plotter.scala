@@ -17,6 +17,11 @@ class Plotter() extends JPanel {
       g2d.setColor(data._2)
       g2d.setStroke(data._3)
       for (i <- (0 to points.size - 2)) {
+        import math._
+        if(g2d.hitClip(min(points(i).x,points(i+1).x),
+            min(points(i).y,points(i+1).y),
+            abs(points(i).x-points(i+1).x),
+            abs(points(i).x-points(i+1).x)))
         g2d.drawLine(points(i).x,
           points(i).y,
           points(i + 1).x,

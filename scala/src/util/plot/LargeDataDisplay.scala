@@ -83,7 +83,7 @@ class LargeDataDisplay(filename: String) extends JFrame {
     }
   }
 
-  def toggleGraph() = {
+  def toggleGraph() = synchronized {
     val track = listBox.getLeadSelectionIndex
     val graph = dataGraphMap.getOrElse(track, -1)
     if (graph == -1) {

@@ -67,7 +67,7 @@ class DataDisplay(filename: String) extends JFrame {
       }
   }
 
-  def toggleGraph() = {
+  def toggleGraph() = synchronized {
     val index = listBox.getLeadSelectionIndex
     if (dataGraphMap(index) != None) {
       val gindex = dataGraphMap(index).get

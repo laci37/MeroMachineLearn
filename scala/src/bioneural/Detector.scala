@@ -2,8 +2,8 @@ package bioneural
 import util.realtime.Simulable
 class Detector(n: FNNeuron) extends Simulable {
   var f = 0d
-  var c = 60d
-  def fd = -f * c
+  var c = 1/30d
+  def fd = -c
   protected var _out = false
   def firing = _out
 
@@ -12,5 +12,5 @@ class Detector(n: FNNeuron) extends Simulable {
     if (n.v > 1) f = 1
   }
 
-  def update() = _out = f > 0.5
+  def update() = _out = f > 0
 }
